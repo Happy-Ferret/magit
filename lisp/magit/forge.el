@@ -74,6 +74,8 @@ ID, and vice-versa."
    (closql-primary-key        :initform id)
    (issue-url-format          :allocation :class)
    (pullreq-url-format        :allocation :class)
+   (create-issue-url-format   :allocation :class)
+   (create-pullreq-url-format :allocation :class)
    (id       :initarg :id)
    (forge    :initarg :forge)
    (owner    :initarg :owner)
