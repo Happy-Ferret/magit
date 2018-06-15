@@ -53,6 +53,14 @@
   (when-let (prj (magit-forge-get-project nil))
     (magit-issue-get prj number)))
 
+;;; Commands
+
+;;;###autoload
+(defun magit-issue-browse (issue)
+  "Visit the url corresponding to ISSUE using a browser."
+  (interactive (list (magit-read-issue "Browse issue")))
+  (browse-url (magit-forge--format-url issue 'issue-url-format)))
+
 ;;; Utilities
 
 (defun magit-read-issue (prompt)
@@ -80,6 +88,7 @@
 
 (defvar magit-issue-section-map
   (let ((map (make-sparse-keymap)))
+    (define-key map [remap magit-browse-thing] 'magit-issue-browse)
     map))
 
 (defun magit-insert-issues ()

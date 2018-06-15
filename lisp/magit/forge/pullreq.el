@@ -60,6 +60,14 @@
   (when-let (prj (magit-forge-get-project nil))
     (magit-pullreq-get prj number)))
 
+;;; Commands
+
+;;;###autoload
+(defun magit-pullreq-browse (pullreq)
+  "Visit the url corresponding to PULLREQ using a browser."
+  (interactive (list (magit-read-pullreq "Browse pull-request")))
+  (browse-url (magit-forge--format-url pullreq 'pullreq-url-format)))
+
 ;;; Utilities
 
 (defun magit-read-pullreq (prompt)
@@ -87,6 +95,7 @@
 
 (defvar magit-pullreq-section-map
   (let ((map (make-sparse-keymap)))
+    (define-key map [remap magit-browse-thing] 'magit-pullreq-browse)
     map))
 
 (defun magit-insert-pullreqs ()
